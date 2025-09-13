@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block extraCSS %}
+    .fa-star{
+        color: lightgray;
+    }
+
+    .fa-star.checked{
+        color: gold;
+    }
+
+    .fa-star-half.checked{
+        color: gold;
+    }
+{% endblock %}
+
+{% block content %}
+	<div class="icon-container">
+		<div class="icon-box">
+			<img src="{{productoEncontrado.image}}" alt="Imagen de {{productoEncontrado.title}}">
+                <p>Título: {{productoEncontrado.title}}</p>
+                <p>Precio: {{productoEncontrado.price}}</p>
+                <p>Descripción: {{productoEncontrado.description}}</p>
+                <p>Categoría: {{productoEncontrado.category}}</p>
+                <p id="valoracionMedia">Valoración Media: {{productoEncontrado.rating.rate}}</p>
+                <span class="starts" data-_id="{{productoEncontrado.id}}">
+                    Aquí irá el rating de {{productoEncontrado.id}}
+                </span>
+                <p id="numValoraciones">Número de Valoraciones: {{productoEncontrado.rating.count}}</p>
+                <form action="/anadirCarritoArticulo" method="POST">
+                    <input type="hidden" name="identificadorArticulo" value={{productoEncontrado.id}}>
+                    <button type="submit" class="miBoton">Añadir al Carrito</button>
+                </form>   
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block scripts %}
+ <script src="rating.js"></script>
+{% endblock %}

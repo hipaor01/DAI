@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+{% if mensajeError == "" %}
+	<div class="col">
+		<h2 class="row-md-6">Información del artículo actualizada con éxito</h2>
+		<form action="/portada" method="GET" class="row-md-6">
+	        <button type="submit" class="miBoton">Volver a la portada</button>
+	    </form>
+	</div>
+{% else %}
+	<div class="col">
+		<h2 class="row-md-6">{{mensajeError}}</h2>
+		<form action="/portada" method="GET" class="row-md-6">
+	        <button type="submit" class="miBoton">Volver a la portada</button>
+	    </form>
+	</div>
+{% endif %}
+
+{% endblock %}

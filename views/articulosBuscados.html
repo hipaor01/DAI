@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+ {% block iconContainer %}
+    .icon-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+{% endblock %}
+
+{% block iconBox %}
+    .icon-box {
+        text-align: center;
+        width: 150px;
+        flex-basis: 100%;
+    }
+{% endblock %}
+
+
+{% block content %}
+
+	<div class="icon-container">
+        {% for producto in productosEncontradosProcesados %}
+            <div class="icon-box">
+                <img src="{{producto.image}}" alt="Imagen de {{producto.title}}">
+                <p>{{producto.title}}</p>
+                <form action="/mostrarArticulo" method="GET">
+                    <input type="hidden" name="idArticulo" value={{producto.id}}>
+                    <button type="submit" class="miBoton">Ver Artículo</button>
+                </form>    
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col">
+	<h2 class="row-md-6">Hasta pronto {{usuario}}</h2>
+	<form action="/portada" method="GET" class="row-md-6">
+	     <button type="submit" class="miBoton">Volver a la portada</button>
+	</form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mi tienda</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .bg-turquoise {
+            background-color: #40E0D0;
+            color: white;
+        }
+
+        .titulo-Pagina {
+            margin-left: 20px;
+        }
+
+        .dropdown-toggle {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        {% block iconContainer %}
+        .icon-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        {% endblock %}
+
+        {% block iconBox %}
+        .icon-box {
+            text-align: center;
+            width: 150px;
+        }
+        {% endblock %}
+
+        .icon-box p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .icon-box img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .miBoton {
+            color: white;
+            background-color: green;
+            border: none;
+        }
+
+        {% block extraCSS %}
+        {% endblock %}
+    </style>
+</head>
+
+<body>
+    <header class="bg-turquoise py-3">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="titulo-Pagina">
+                    <h2>Tienda</h2>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categorías
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        {% for categoria in categoriasProcesadasUnicas %}
+                            <a class="dropdown-item">{{categoria}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <form action="/buscarArticulo" method="GET" class="col-md-2">
+                <input type="text" name="cadenaArticulo" placeholder="Buscar..." required>
+                <button type="submit" class="miBoton">Buscar Artículo</button>
+            </form>
+
+
+            {%if admin %}
+                <form action="/cambiarProducto" method="GET" class="col-md-2">
+                    <input type="text" name="tituloArticulo" placeholder="Buscar..." required>
+                    <button type="submit" class="miBoton">Cambiar título y/o precio del artículo</button>
+                </form>
+            {% else %}
+                {% if hayArticulos %}
+                    <form action="/verCarrito" method="GET" class="col-md-2">
+                        <input type="image" src="imagenesProductos/carrito-de-compras.png" alt="Enviar" style="width: 40px; height: 40px;">
+                    </form>
+                {%  else  %}
+                    <form action="/verCarrito" method="GET" class="col-md-2" style="display:none;">
+                        <input type="image" src="imagenesProductos/carrito-de-compras.png" alt="Enviar" style="width: 40px; height: 40px;">
+                    </form>       
+                {% endif %}
+            {% endif %}
+
+            {% if modo == "Identificarse" %}
+                <form action="/login" method="GET" class="col-md-2">
+                    <button type="submit" class="miBoton">{{modo}}</button>
+                </form>
+            {% else %}
+                <form action="/logout" method="GET" class="col-md-2">
+                    <button type="submit" class="miBoton">{{modo}}</button>
+                </form>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Bloque que las plantillas hijas pueden extender -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+     {% block scripts %}
+    <!-- jQuery y Popper.js necesarios para Bootstrap -->
+    <script src="jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% endblock %}
+</body>
+
+</html>

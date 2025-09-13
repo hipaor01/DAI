@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="icon-container">
+		{% for articulo in articulos %}
+			<div class="icon-box">
+				<img src="{{articulo.image}}" alt="Imagen de {{articulo.title}}">
+				<p>{{articulo.title}}</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

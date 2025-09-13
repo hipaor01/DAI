@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if mensajeError == "" %}
+	<div class="col">
+		<h2 class="row-md-6">Bienvenido {{usuario}}</h2>
+		<form action="/portada" method="GET" class="row-md-6">
+	        <button type="submit" class="miBoton">Volver a la portada</button>
+	    </form>
+	</div>
+{% else %}
+	<div class="col">
+		<h2 class="row-md-6">{{mensajeError}}</h2>
+		<form action="/login" method="GET" class="row-md-6">
+	        <button type="submit" class="miBoton">Volver a inicio de sesión</button>
+	    </form>
+	</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "login.html" %}
+
+{% block extraWidth %}
+    max-width: 900px;
+{% endblock %}
+
+{% block content %}
+
+{% if mensajeError == "" %}
+<div class="form-container">
+	<form action="/actualizadoProducto" method="POST" class="formulario">
+		<h2>Modificar Artículo</h2>
+
+		<label for="tituloActual">Título Actual</label>
+		<input type="text" id="tituloActual" name="tituloActual" value="{{articulo.title}}" required readonly>
+
+		<label for="precioActual">Precio Actual</label>
+		<input type="text" id="precioActual" name="precioActual" placeholder="{{articulo.price}}" disabled>
+
+		<label for="tituloNuevo">Título Nuevo</label>
+		<input type="text" id="tituloNuevo" name="tituloNuevo" required>
+
+		<label for="precioNuevo">Precio Nuevo</label>
+		<input type="text" id="precioNuevo" name="precioNuevo" required>
+
+		<button type="submit">Enviar</button>
+	</form>
+</div>
+{% else %}
+	<h2>{{mensajeError}}</h2>
+	<form action="/portada" method="GET">
+	    <button type="submit" class="miBoton">Volver a la portada</button>
+	</form>
+{% endif %}
+
+{% endblock %}
